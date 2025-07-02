@@ -3,5 +3,5 @@ pandas
 numpy
 matplotlib
 plotly
-scikit learn
+scikit-learn
 tensorflow
