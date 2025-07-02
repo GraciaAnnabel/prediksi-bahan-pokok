@@ -11,10 +11,10 @@ from tensorflow.keras.layers import LSTM, Dense
 
 # Konfigurasi halaman
 st.set_page_config(layout="wide")
-st.title("📈 Prediksi Harga Komoditas Bahan Pokok")
+st.title("Prediksi Harga Komoditas Bahan Pokok")
 
 # Upload file
-uploaded_file = st.file_uploader("📥 Unggah file Excel harga komoditas", type=["xlsx"])
+uploaded_file = st.file_uploader("Unggah file Excel harga komoditas", type=["xlsx"])
 
 if uploaded_file:
     # Load dan siapkan data
@@ -23,7 +23,7 @@ if uploaded_file:
     df = df_raw.transpose()
     df.index = pd.to_datetime(df.index, format='%Y %B')
 
-    st.subheader("📊 Data Harga Komoditas")
+    st.subheader("Data Harga Komoditas")
     st.dataframe(df.tail(), use_container_width=True)
 
     # Normalisasi
@@ -49,7 +49,7 @@ if uploaded_file:
     model.add(Dense(df.shape[1]))
     model.compile(optimizer='adam', loss='mse')
 
-    with st.spinner("🔁 Melatih model..."):
+    with st.spinner("Melatih model..."):
         model.fit(X, y, epochs=300, verbose=0)
 
     # Prediksi 6 bulan ke depan (recursive)
@@ -68,15 +68,15 @@ if uploaded_file:
     df_preds = pd.DataFrame(np.round(preds).astype(int), columns=df.columns, index=future_dates)
 
     # === Pilih Komoditas ===
-    st.subheader("📌 Pilih Komoditas")
+    st.subheader("Pilih Komoditas")
     selected_commodity = st.selectbox("Pilih salah satu komoditas", df.columns)
 
-    st.markdown(f"### 💰 Prediksi Harga 6 Bulan ke Depan – **{selected_commodity}**")
+    st.markdown(f"### Prediksi Harga 6 Bulan ke Depan – **{selected_commodity}**")
 
     st.dataframe(df_preds[[selected_commodity]], use_container_width=True)
 
     # === Matplotlib Visualisasi ===
-    st.subheader("📉 Visualisasi Harga (Matplotlib)")
+    st.subheader("Visualisasi Harga (Matplotlib)")
 
     full_df = pd.concat([df, df_preds])
     fig, ax = plt.subplots(figsize=(10, 5))
@@ -89,7 +89,7 @@ if uploaded_file:
     st.pyplot(fig)
 
     # === Plotly Visualisasi Interaktif ===
-    st.subheader(f"📈 Tren Harga Prediksi – {selected_commodity} (Interaktif)")
+    st.subheader(f"Tren Harga Prediksi – {selected_commodity} (Interaktif)")
 
     plot_df = df_preds[[selected_commodity]].copy()
     plot_df = plot_df.reset_index()
@@ -117,4 +117,4 @@ if uploaded_file:
     st.plotly_chart(fig_plotly, use_container_width=True)
 
 else:
-    st.info("📂 Silakan unggah file Excel terlebih dahulu. Format: kolom = bulan, baris = komoditas.")
+    st.info("Silakan unggah file Excel terlebih dahulu. Format: kolom = bulan, baris = komoditas.")
