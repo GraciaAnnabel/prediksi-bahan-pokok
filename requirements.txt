@@ -5,4 +5,3 @@ matplotlib
 plotly
 scikit-learn
 openpyxl
-tensorflow==2.11.0
