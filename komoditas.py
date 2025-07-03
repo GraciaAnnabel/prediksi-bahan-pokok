@@ -1,4 +1,4 @@
-import streamlit as st  # Harus paling atas
+import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,8 +6,6 @@ import matplotlib.ticker as ticker
 import plotly.express as px
 
 from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
 
 # Konfigurasi halaman
 st.set_page_config(layout="wide")
